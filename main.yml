@@ -1,0 +1,22 @@
+name: C++ with CMake with tests
+
+on: [push, pull_request]
+
+jobs:
+  Project:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: mkdir project/build
+      run: mkdir project/build
+    - name: Compile
+      working-directory: project/build
+      run: |
+        cmake ..
+        make
+    - name: Run tests
+      working-directory: project/build
+      run: ctest -V    
